@@ -13,21 +13,43 @@
 
 //selezionare il container
 let numberContainer = document.querySelector(`#conteiner`);
-
+let rightContainer = document.querySelector(`#right`)
+let wrongContainer = document.querySelector(`#wrong`)
 
 //seleziono il bottone e lo metto in ascolto
 let startBtn = document.querySelector(`#start-btn`);
 startBtn.addEventListener(`click`, function(){
 
     //array di numeri random stampato in pagina
-    let randomNumbers = getRndInteger(1, 50, 5);
+    let randomNumbers = getRndInteger(1, 10, 5);
     numberContainer.innerHTML += `${randomNumbers}`
     console.log(randomNumbers)
     //dopo 30sec i numeri scompaiono e viene fuori il prompt
-    setTimeout(numberDisappear, 2000)
+    setTimeout(numberDisappear, 2000);
     //seleziono i valori del prompt
-    // let answer = parseInt(prompt(`Scrivi i numeri che ricordi:`)).value;
-    
+    function numberDisappear (){
+        numberContainer.remove()
+      }
+
+    setTimeout(promptAppear, 3000)
+      function promptAppear (){
+        
+        for(let i = 0; i < randomNumbers.length; i++){
+            let answer = parseInt(prompt(`Scrivi i numeri che ricordi`)); 
+            console.log(answer);
+            
+            if (randomNumbers.includes(answer)){
+                rightContainer.innerHTML += `${answer}`
+                
+            } else if (!randomNumbers.includes(answer)) {
+                wrongContainer.innerHTML += `${answer}`
+            }
+            
+        }
+        numberContainer.append += `Numeri da memorizzare: ${randomNumbers}`
+        
+        
+      }
 })
 
 
@@ -48,7 +70,3 @@ function getRndInteger(min, max, arrayLength) {
     return arrayList
   }
 
-  function numberDisappear (){
-    numberContainer.remove()
-    console.log(numberContainer)
-  }
