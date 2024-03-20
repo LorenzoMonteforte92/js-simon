@@ -25,15 +25,13 @@ startBtn.addEventListener(`click`, function(){
     numberContainer.innerHTML += `${randomNumbers}`
     console.log(randomNumbers)
     //dopo 30sec i numeri scompaiono e viene fuori il prompt
-    setTimeout(numberDisappear, 2000);
+    setTimeout(function(){
+        numberContainer.innerHTML = ``
+    }, 2000);
     //seleziono i valori del prompt
-    function numberDisappear (){
-        numberContainer.remove()
-      }
+    
 
-    setTimeout(promptAppear, 3000)
-      function promptAppear (){
-        
+    setTimeout(function (){
         for(let i = 0; i < randomNumbers.length; i++){
             let answer = parseInt(prompt(`Scrivi i numeri che ricordi`)); 
             console.log(answer);
@@ -44,12 +42,16 @@ startBtn.addEventListener(`click`, function(){
             } else if (!randomNumbers.includes(answer)) {
                 wrongContainer.innerHTML += `${answer}`
             }
-            
+            numberContainer.innerHTML = `${randomNumbers}`
         }
-        numberContainer.append += `Numeri da memorizzare: ${randomNumbers}`
+        
+    }, 3000)
+      
+        
+       
         
         
-      }
+      
 })
 
 
